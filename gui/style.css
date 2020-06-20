@@ -1,0 +1,224 @@
+.pinout, .overlay {
+    position: relative;
+    height: 518px;
+    float: left;
+}
+
+.pinout {
+    width: 600px;
+}
+
+.pinout:before, .pinout:after, .overlay:before, .overlay:after {
+    content: '';
+    display: block;
+    width: 27px;
+    height: 27px;
+    background: #fff;
+    border-radius: 50%;
+    border: 16px solid #f7df84;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+
+.pinout:after, .overlay:after {
+    top: auto;
+    bottom: 3px;
+}
+
+.overlay:before, .overlay:after {
+    left: auto;
+    right: 3px;
+}
+
+.gpiobase {
+    position: absolute;
+    width: 68px;
+    height: 336px;
+    background: #2d3436;
+    border: 2px double #1c2021;
+    top: 110px;
+    left: 265px;
+}
+
+.gpiobase:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 10px;
+    background: #1c2021;
+    border-radius: 0 0 10px 10px;
+    top: 0;
+    left: 24px;
+}
+
+.gpiobase:after {
+    content: 'MCP23017';
+    position: absolute;
+    display: block;
+    color: rgba(255, 255, 255, .8);
+    margin: 0 -60px;
+    top: 148px;
+    left: 50px;
+    font-size: .9em;
+    transform: rotate(90deg);
+}
+
+.gpios {
+    position: relative;
+}
+
+.gpios ul {
+    position: absolute;
+    list-style: none;
+    width: 24px;
+    top: 5px;
+}
+
+.gpios li {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0 7.5px 7.5px 0;
+    float: left;
+}
+
+.gpios a {
+    display: block;
+    position: relative;
+    font-size: 1em;
+    line-height: 23px;
+    height: 22px;
+    margin-bottom: 1.5px;
+}
+
+.gpios .num {
+    color: #073642;
+    font-size: .8em;
+    opacity: .8;
+    text-indent: 0;
+    position: absolute;
+    left: 25px;
+}
+
+.gpios .pin {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    right: -2px;
+}
+
+.gpios .on .pin {
+    background: none;
+}
+
+.gpios .pin:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    background: #fdf6e3;
+    top: 2px;
+    left: 3px;
+}
+
+.gpios .on a:after, .gpios .pullup a:after {
+    content: '(active)';
+    position: absolute;
+    top: -1px;
+    left: 60px;
+}
+
+.gpios .pullup a:after {
+    content: '(pullup)';
+}
+
+.gpios .on:nth-child(-n+14) a:after {
+    right: 60px;
+}
+
+.gpios li {
+    position: relative;
+    text-indent: 60px;
+}
+
+.gpios li a {
+    width: 150px;
+    color: #e9e5d2;
+}
+
+.gpios li:nth-child(-n+14) {
+    left: -144px;
+}
+
+.gpios li:nth-child(-n+14) a {
+    direction: rtl;
+    text-align: right;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+.gpios li:nth-child(-n+14) .num {
+    left: auto;
+    right: 26px;
+}
+
+.gpios li:nth-child(n+15) {
+    left: 64px;
+    top: -329px;
+}
+
+.gpios li:nth-child(n+15) a {
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+}
+
+.gpios li .num {
+    color: #ccc;
+}
+
+.gpios li:nth-child(n+15) .pin {
+    left: 2px;
+    top: 2px;
+}
+
+.gpios a:hover, .gpios .active a {
+    color: #063541 !important;
+}
+
+.gpios li a:hover:before, .gpios .active a:before {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 20px;
+    background: #faf0e6;
+    border-radius: 0 10px 10px 0;
+    top: 1px;
+    right: 19px;
+    z-index: -1;
+}
+
+.gpios li:nth-child(n+15) a:hover:before, .gpios .active:nth-child(n+15) a:before {
+    border-radius: 10px 0 0 10px;
+    left: 18px;
+}
+
+.gpios a:hover .num, .gpios .active .num {
+    color: #073642 !important;
+}
+
+.gpios li a small {
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: .7em;
+}
+
+.gpios .reset {
+    text-decoration: overline;
+}

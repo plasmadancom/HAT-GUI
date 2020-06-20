@@ -1,0 +1,232 @@
+.board {
+    padding-left: 130px;
+}
+
+.board:before {
+    background-image: url("img/overlay.png");
+}
+
+.gpios {
+    position: relative;
+}
+
+.gpios ul {
+    position: absolute;
+    list-style: none;
+    width: 48px;
+}
+
+.gpios li {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0 7.5px 7.5px 0;
+    float: left;
+}
+
+.pinout, .overlay {
+    position: relative;
+    width: 300px;
+    height: 518px;
+    float: left;
+}
+
+.pinout:before, .pinout:after, .overlay:before, .overlay:after {
+    content: '';
+    display: block;
+    width: 27px;
+    height: 27px;
+    background: #fff;
+    border-radius: 50%;
+    border: 16px solid #f7df84;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+
+.pinout:after, .overlay:after {
+    top: auto;
+    bottom: 3px;
+}
+
+.overlay:before, .overlay:after {
+    left: auto;
+    right: 3px;
+}
+
+.gpiobase {
+    width: 48px;
+    height: 380px;
+    background: #2d3436;
+    position: absolute;
+    top: 69px;
+    left: 20px;
+}
+
+.gpios ul {
+    list-style: none;
+    position: absolute;
+    top: 3px;
+}
+
+.gpios a {
+    display: block;
+    position: relative;
+    font-size: 1em;
+    line-height: 23px;
+    height: 22px;
+    margin-bottom: 1.5px;
+}
+
+.gpios .num {
+    color: #073642;
+    font-size: .8em;
+    opacity: .8;
+    text-indent: 0;
+    position: absolute;
+    left: 30px;
+}
+
+.gpios .on .pin {
+    background: #c2321d;
+}
+
+.gpios .pin {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #2d3436;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: auto;
+    right: 2px;
+}
+
+.gpios .pin:after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #fdf6e3;
+    border-radius: 100%;
+    top: 5px;
+    left: 5px;
+}
+
+.gpios li:nth-child(odd) {
+    position: relative;
+    text-indent: 68px;
+    left: -140px;
+}
+
+.gpios li:nth-child(odd) a {
+    direction: rtl;
+    width: 158px;
+    color: #063541;
+    padding-left: 5px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+.gpios li:nth-child(odd) .num {
+    text-align: right;
+    left: auto;
+    right: 50px;
+}
+
+.gpios li:nth-child(even) {
+    left: 1px;
+    z-index: 10;
+}
+
+.gpios li:nth-child(even) {
+    text-indent: 60px;
+}
+
+.gpios li:nth-child(even) a {
+    color: #e9e5d2;
+    width: 150px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+}
+
+.gpios li:nth-child(even) .num {
+    color: #ccc;
+}
+
+.gpios li:nth-child(even) .pin {
+    left: 2px;
+    top: 2px;
+}
+
+.gpios .pullup .pin {
+    background: #268bd2;
+}
+
+.gpios a:hover, .gpios .active a {
+    background: #faf0e6;
+    color: #063541 !important;
+}
+
+.gpios a:hover .num, .gpios .active .num {
+    color: #073642 !important;
+}
+
+.gpios li a small {
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: .7em;
+}
+
+.overlay .dynamic-led {
+    width: 30px;
+    height: 60px;
+    background: url("img/led.png");
+    top: 130px;
+    left: -330px;
+    z-index: -1;
+}
+
+.overlay .led1 {
+    top: 230px;
+}
+
+.overlay .led2 {
+    top: 330px;
+}
+
+.overlay .led3 {
+    top: 430px;
+}
+
+.overlay .relay0, .overlay .relay1, .overlay .relay2, .overlay .relay3 {
+    width: 407px;
+    height: 71px;
+    background: url("img/relay.png");
+    position: absolute;
+    top: 115px;
+    left: -204px;
+}
+
+.overlay .relay1 {
+    top: 215px;
+}
+
+.overlay .relay2 {
+    top: 315px;
+}
+
+.overlay .relay3 {
+    top: 415px;
+}
+
+.overlay .enabled {
+    display: block;
+}
+
+.overlay .selected {
+    filter: drop-shadow(0 0 15px rgba(202, 255, 199, 1));
+}
