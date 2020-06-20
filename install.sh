@@ -1,16 +1,16 @@
 #!/bin/sh
-# ctrlhat-install.sh Easy installer for HAT-GUI
+# install.sh Easy installer for HAT-GUI
 
-GITHUB_USERNAME = "plasmadancom"
+GITHUB_USERNAME="plasmadancom"
 
-CONFIG = "/boot/config.txt"
-VSFTPD_CONF = "/etc/vsftpd.conf"
-APACHE_CONF = "/etc/apache2/apache2.conf"
-CONFIRM_INPUT = "Please answer yes or no."
-GUI_FILES = "https://github.com/$GITHUB_USERNAME/HAT-GUI/trunk/gui"
+CONFIG="/boot/config.txt"
+VSFTPD_CONF="/etc/vsftpd.conf"
+APACHE_CONF="/etc/apache2/apache2.conf"
+CONFIRM_INPUT="Please answer yes or no."
+GUI_FILES="https://github.com/$GITHUB_USERNAME/HAT-GUI/trunk/gui"
 
-INSTALL_WEBROOT = false
-INSTALL_FTP = false
+INSTALL_WEBROOT=false
+INSTALL_FTP=false
 
 # Arguments: 1 search, 2 replace, 3 setting name, 4 file
 update_file() {
@@ -76,7 +76,7 @@ pip install wiringpi
 
 echo "Update AllowOverride None setting in $APACHE_CONF ..."
 
-perl -i -p0e 's/<Directory \/var\/www\/>\n\tOptions Indexes potato secret FollowSymLinks\n\tAllowOverride None\n\tRequire all granted\n<\/Directory>/<Directory \/var\/www\/>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride All\n\tRequire all granted\n<\/Directory>/gms' $APACHE_CONF
+perl -i -p0e 's/<Directory \/var\/www\/>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride None\n\tRequire all granted\n<\/Directory>/<Directory \/var\/www\/>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride All\n\tRequire all granted\n<\/Directory>/gms' $APACHE_CONF
 
 
 #echo "Add pi user to i2c user group ..."

@@ -1,6 +1,11 @@
 # HAT-GUI
+<p align="center">
+    <a href="https://io.plasmadan.com" target="_blank" rel="nofollow">
+        <img alt="HAT-GUI" src="/img/hat-gui.gif">
+    </a>
+</p>
 
-Pinout guide &amp; interactive web GUI for MCP23008 and MCP23017 based Raspberry Pi expansion boards. The GUI is fully responsive and adapts to any screen size.
+Once installed on your Raspberry Pi, this interactive GUI allows quick &amp; easy control of any MCP23017 or MCP23008 based expansion boards. The GUI is fully responsive and adapts to any screen size.
 
 Check-out the [Live Demo.](https://io.plasmadan.com)
 
@@ -19,10 +24,12 @@ Alternatively, you can install manually. See our [setup guide](#setup-guide).
 
 ## Add Your Own Board
 
-Fork this repository and copy any existing board within /src and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is setup in php array format, change this to your board's pinout and modify the stylesheet to display your board as you like. See notes within board.php for configuration details. You can use your own version of the easy installer to streamline installation of your custom board onto your Pi, simply edit install.sh and change GITHUB_USERNAME to your own.
+Fork this repository and copy any existing board within /src and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board as you like. See notes within board.php for configuration details.
+
+You can use your own version of the easy installer to streamline installation of your custom board onto your Pi, simply edit install.sh and change GITHUB_USERNAME to your own.
 
 ```
-sudo wget https://github.com/**USERNAME**/PI-GUI/blob/master/install.sh
+sudo wget https://github.com/USERNAME/HAT-GUI/blob/master/install.sh
 sudo sh install.sh
 ```
 
@@ -30,13 +37,13 @@ Equally, you can delete any boards you dont need by simply deleting the director
 
 ## Contributing
 
-If HAT-GUI is usefull to you please help improve it by contributing. If you have a board you want to pull to the main branch submit a pull request for approval.
+If HAT-GUI is useful to you please help improve it by contributing. If you have a board you want to add to the main branch submit a pull request for approval.
 
-We have a few ideas for improvments which we're looking to implement in the future:
+We have a few ideas for improvements which we're looking to implement in the future:
 
 * Ditch WiringPi (deprecated)
 * Convert to Node.js
-    Would be awesome once done, but requires completely re-building from scratch. (╥_╥)
+  - Would be awesome once done, but requires completely re-building from scratch. (╥_╥)
 
 ### Image Overlays
 
@@ -130,7 +137,7 @@ You can increase the I2C bus speed by adding the i2c_baudrate paramter to `/boot
 sudo sh -c "echo 'dtparam=i2c_baudrate=400000' >> /boot/config.txt"
 ```
 
-Add the 'pi' user to the I2C group to avoid having to run the I2C tools as root. This sis usally default anyway.
+Add the 'pi' user to the I2C group to avoid having to run the I2C tools as root. This sis usually default anyway.
 
 ```
 sudo adduser pi i2c
@@ -178,6 +185,32 @@ sudo pip install wiringpi
 sudo apt install apache2 php libapache2-mod-php -y
 ```
 
+AllowOverride None is now default [since Apache 2.3.9](https://httpd.apache.org/docs/2.4/mod/core.html), we need to change it back to AllowOverride All.
+
+Edit apache2.conf.
+
+```
+sudo nano /etc/apache2/apache2.conf
+```
+
+Find AllowOverride None within Directory /var/www/.
+
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+```
+
+Change it to AllowOverride All.
+
+Save and exit nano, then restart apache.
+
+```
+sudo systemctl restart apache2
+```
+
 Test the webserver is working. Navigate to http://localhost/ on the Pi itself, or http://192.168.1.10 (whatever the Pi's IP address is) from another computer on the network. Use the snippet below to get the Pi's IP address in command line.
 
 ```
@@ -194,16 +227,29 @@ You need to clone the web GUI files from the 'gui' subfolder on GitHub, to do th
 sudo apt install subversion -y
 ```
 
+Choose where to install HAT-GUI.
+
+### Option 1: Install at Web Root
+
 Navigate to the web root.
 
 ```
 cd /var/www/html
 ```
 
-Empty default Apache files
+Empty default Apache files.
 
 ```
 sudo rm -rf *
+```
+
+### Option 2: Subdirectory Install
+
+HAT-GUI can be installed in any subdirectory.
+
+```
+mkdir /var/www/html/hats
+cd /var/www/html/hats
 ```
 
 Clone web GUI files (you must include the period at the end).
