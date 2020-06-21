@@ -37,22 +37,15 @@ require_once __DIR__ . '/src/inc/functions.php';
     <meta name="description" content="<?= $board->description ?>">
     <meta name="image" content="<?= $board->image_url ?>">
     
-    <!-- Schema.org for Google -->
-    <meta itemprop="name" content="<?= $board->page_title ?>">
-    <meta itemprop="description" content="<?= $board->description ?>">
-    <meta itemprop="image" content="<?= $board->image_url ?>">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="<?= $board->page_title ?>">
-    <meta name="twitter:description" content="<?= $board->description ?>">
-    
-    <!-- Open Graph -->
-    <meta name="og:title" content="<?= $board->page_title ?>">
-    <meta name="og:description" content="<?= $board->description ?>">
-    <meta name="og:url" content="<?= 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ?>">
-    <meta name="og:site_name" content="<?= $board->page_title ?>">
-    <meta name="og:type" content="website">
+    <!-- Social -->
+    <meta property="og:title" content="<?= $board->page_title ?>">
+    <meta property="og:description" content="<?= $board->description ?>">
+    <meta property="og:image" content="<?= $board->image_url ?>">
+    <meta property="og:url" content="<?= 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ?>">
+    <meta property="og:site_name" content="HAT-GUI">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="HAT-GUI - Interactive UI &amp; Pinout Guide">
     
     <link href="/src/css/style.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">

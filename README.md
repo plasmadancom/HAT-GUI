@@ -35,6 +35,10 @@ sudo sh install.sh
 
 Equally, you can delete any boards you dont need by simply deleting the directory.
 
+## Python Examples
+
+We have provided some example Python scripts to get you started (see [here](https://github.com/plasmadancom/HAT-GUI/tree/master/python_examples)).
+
 ## Contributing
 
 If HAT-GUI is useful to you please help improve it by contributing. If you have a board you want to add to the main branch submit a pull request for approval.
