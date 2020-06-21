@@ -24,7 +24,7 @@ Alternatively, you can install manually. See our [setup guide](#setup-guide).
 
 ## Add Your Own Board
 
-Fork this repository and copy any existing board within /src and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board as you like. See notes within board.php for configuration details.
+Fork this repository and copy any existing board within /src and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board. See notes within board.php for configuration details.
 
 You can use your own version of the easy installer to streamline installation of your custom board onto your Pi, simply edit install.sh and change GITHUB_USERNAME to your own.
 
@@ -54,7 +54,7 @@ We have a few ideas for improvements which we're looking to implement in the fut
 Image overlays can be used to add interactive elements to your board such as relays or LEDs.
 CSS classes that contain "led" are dynamically displayed according to gpio status.
 
-Example, if you have 3 GPIOs with classes led1, led2, led3 respectively. You can add an image overlay to use for those LEDs.
+E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can add an image overlay to use for those LEDs with a small snippet of CSS. See [CTRL HAT](https://io.plasmadan.com/ctrlhat) for a working example.
 
 ```
 .overlay .dynamic-led {
@@ -141,7 +141,7 @@ You can increase the I2C bus speed by adding the i2c_baudrate paramter to `/boot
 sudo sh -c "echo 'dtparam=i2c_baudrate=400000' >> /boot/config.txt"
 ```
 
-Add the 'pi' user to the I2C group to avoid having to run the I2C tools as root. This sis usually default anyway.
+Add the 'pi' user to the I2C group to avoid having to run the I2C tools as root. This is usually default anyway.
 
 ```
 sudo adduser pi i2c
@@ -223,9 +223,9 @@ hostname -I
 
 ## Install HAT-GUI
 
-You need to clone the web GUI files from the 'gui' subfolder on GitHub, to do that we need to install subversion.
+You need to clone the web GUI files from the /gui subfolder, to do that we need to install subversion.
 
-*Note: The html files are for the live demo, you don't need to install them.*
+**Note: The html files are for the live demo, you don't need to install them.**
 
 ```
 sudo apt install subversion -y
@@ -249,14 +249,16 @@ sudo rm -rf *
 
 ### Option 2: Subdirectory Install
 
-HAT-GUI can be installed in any subdirectory.
+HAT-GUI can be installed in any subdirectory. In this example we'll create a new subdirectory /hats at the web root.
 
 ```
 mkdir /var/www/html/hats
 cd /var/www/html/hats
 ```
 
-Clone web GUI files (you must include the period at the end).
+### Checkout
+
+Install HAT-GUI here (you must include the period at the end).
 
 ```
 sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui .
@@ -268,7 +270,7 @@ Be sure to set file permissions to 755 in the web directory.
 sudo chmod -R 755 /var/www
 ```
 
-That's it! reload the web page to see the HAT-GUI web page.
+That's it! reload the web page and you should see the HAT-GUI interface.
 
 ## Optional: Install vsftpd for Easier File Editing
 

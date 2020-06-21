@@ -19,15 +19,46 @@
 
 $(document).ready(function() {
     // Parse settings from DOM
-    var demo_mode = $('#demo_mode').val() == 'true' || $('#demo_mode').val() == 1;
+    var demo_mode = $('#demo_mode').val() == 'true';
     var pinBase = parseInt($('#pin_base').val());
     var extension = $('#extension').val().toLowerCase();
-    //var i2c_addr = parseInt($('#i2c_addr').val()).toString(16);
+    
+    // Return query string
+    function get_query(q) {
+        var query = window.location.search.substring(1);
+        var arr = query.split('&');
+        
+        // Iterate query parameters
+        for (var i = 0; i < arr.length; i++) {
+            var val = arr[i].split('=');
+            
+            // Return if matched
+            if(val[0] == q) return val[1];
+        }
+        
+        return false;
+    }
     
     // Return / update I2C address
     function i2c_addr(u = false) {
         // Update
-        if (u != false) $('.gpios .' + u).hasClass('pullup') ? $('.gpios .' + u).removeClass('pullup') : $('.gpios .' + u).addClass('pullup');
+        if (u != false) {
+            // Convert I2C address to binary: A0: 1's, A1: 10's, A2: 100's
+            var dec = parseInt(u-32);
+            var bin = (dec >>> 0).toString(2);
+            
+            // Kinda crazy method, but it's fast and it works!
+            var pad = ('000' + bin).slice(-3).split('').reverse().join('');
+            
+            // Add pullup class to relevant pins
+            for (var i = 0; i < 3; i++) {
+                var i2c = $('.gpios .i2c-a' + i);
+                
+                pad.charAt(i) == 1 ? i2c.addClass('pullup') : i2c.removeClass('pullup');
+            }
+            
+            return true;
+        }
         
         var i2c0 = $('.gpios .i2c-a0').hasClass('pullup') ? 1:0;
         var i2c1 = $('.gpios .i2c-a1').hasClass('pullup') ? 10:0;
@@ -35,9 +66,6 @@ $(document).ready(function() {
         
         // Combine and convert to decimal
         var dec = parseInt(i2c0 + i2c1 + i2c2, 2);
-        
-        // Update GUI...
-        
         
         return '0x2' + dec;
     }
@@ -276,15 +304,6 @@ $(document).ready(function() {
         });
     });
     
-    // Switch I2C Address
-    $('.page .i2c-swap').on('click', function(e) {
-        e.preventDefault();
-        
-        var i2c = $(this).data('i2c');
-        
-        $(location).attr('href', window.location.pathname + '?i2c=' + i2c_addr(i2c));
-    });
-    
     // Write GPIOs
     $('.page .toggle-all').on('click', function(e) {
         e.preventDefault();
@@ -346,11 +365,14 @@ $(document).ready(function() {
         });
     });
     
+    // Check for I2C address parameter
+    if (get_query('i2c') != false) i2c_addr(get_query('i2c'));
+    
     // Notify user if development mode enabled
     if (demo_mode) print_log('Demo mode enabled.');
     else {
         // Notify user if board detected @ I2C address
-        if ($(".connection span").hasClass('error')) {
+        if ($(".connection").hasClass('connection-error')) {
             print_log('Device connection error: ' + i2c_addr());
         }
         else print_log('Device ' + i2c_addr() + ' connected.');
