@@ -1,2 +1,9 @@
     Options -Indexes
-    DirectoryIndex /index.php
+    DirectoryIndex index.php
+    
+    RewriteEngine On
+    
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule .* - [L]
+    
+    RewriteRule .* index.php

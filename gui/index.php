@@ -21,9 +21,12 @@
 
 $pinBase = 100;
 $demo_mode = false;
+$install_subdir = '';
 
-require_once __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . '/board.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI'] . 'board.php';
 require_once __DIR__ . '/src/inc/functions.php';
+
+$install_Dir = !empty($install_subdir) ? '/' . trim($install_subdir, '/') . '/' : '/';
 
 ?>
 <!doctype html>
@@ -47,9 +50,9 @@ require_once __DIR__ . '/src/inc/functions.php';
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image:alt" content="HAT-GUI - Interactive UI &amp; Pinout Guide">
     
-    <link href="/src/css/style.css" rel="stylesheet">
+    <link href="<?= dirPrefix($install_Dir) ?>src/css/style.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script src="/src/js/jquery.min.js"></script>
+    <script src="<?= dirPrefix($install_Dir) ?>src/js/jquery.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
@@ -57,6 +60,7 @@ require_once __DIR__ . '/src/inc/functions.php';
     <input id="demo_mode" type="hidden" value="<?= $demo_mode ? 'true' : 'false' ?>">
     
     <!-- Settings -->
+    <input id="directory" type="hidden" value="<?= $install_Dir ?>">
     <input id="pin_base" type="hidden" value="<?= $pinBase ?>">
     <input id="extension" type="hidden" value="<?= $board->extension ?>">
     <div class="container">
@@ -104,34 +108,34 @@ foreach ($css_classes as $c) {
         </div>
         <div class="page">
             <ul class="menu">
-                <li<?= cur_page('') ?>><a href="/">MCP23017</a>
-                <li<?= cur_page('MCP23008') ?>><a href="/MCP23008">MCP23008</a>
+                <li<?= cur_page('') ?>><a href="<?= $install_Dir ?>">MCP23017</a>
+                <li<?= cur_page('MCP23008') ?>><a href="<?= $install_Dir ?>MCP23008">MCP23008</a>
 <?php
 
 $boards = array();
 
 // Scrape the web directory for addtional boards and include them
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . '/*', GLOB_ONLYDIR) as $dir) {
-    $dir =  basename($dir);
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$install_Dir*", GLOB_ONLYDIR) as $dir) {
+    $base = basename($dir);
+    $loc = $install_Dir . ltrim($base, '/');
     
     // Ignore these
-    if ($dir == 'MCP23008' or $dir == 'src' or !file_exists($dir . '/board.php')) continue;
+    if ($base == 'MCP23008' or $base == 'src' or !file_exists($base . '/board.php')) continue;
     
     // Include board.php from directory
-    include $dir . '/board.php';
+    include $base . '/board.php';
     
     // If a board image exists, use it
-    $board_img = file_exists($dir . '/img/board.png') ? '<img src="/' . $dir . '/img/board.png" alt="' . $board_name . '">' : '';
+    $board_img = file_exists($base . '/img/board.png') ? '<img src="' . $loc . '/img/board.png" alt="' . $board_name . '">' : '';
     
     // Save for later
-    $boards[$board_name] = ['dir' => $dir, 'img' => $board_img];
+    $boards[$board_name] = ['dir' => $loc, 'img' => $board_img];
     
     // Print menu link to each board
 ?>
-                <li<?= cur_page($dir) ?>><a href="/<?= $dir ?>"><?= $board_name ?></a>
+                <li<?= cur_page($dir) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
 <?php
 }
-
 
 // Board connection status defaults
 $connection = '0x2' . ($i2c_addr-32);
@@ -165,7 +169,7 @@ else {
 if (!empty($board->intro)) echo $board->intro;
 
 // Main page
-if ($_SERVER['REQUEST_URI'] == '/') {
+if ($_SERVER['REQUEST_URI'] == $install_Dir) {
 ?>
                     <h2>Boards</h2>
                     <ul class="boards">
@@ -173,7 +177,7 @@ if ($_SERVER['REQUEST_URI'] == '/') {
     // Print list of each board with image if available
     foreach ($boards as $n => $b) {
 ?>
-                        <li><a href="/<?= $b['dir'] ?>"><?= $b['img'] ?><span><?= $n ?></span></a></li>
+                        <li><a href="<?= $b['dir'] ?>"><?= $b['img'] ?><span><?= $n ?></span></a></li>
 <?php
     }
 ?>
@@ -183,7 +187,7 @@ if ($_SERVER['REQUEST_URI'] == '/') {
 }
 
 // MCP23008 Page
-else if ($_SERVER['REQUEST_URI'] == '/MCP23008/') {}
+else if ($_SERVER['REQUEST_URI'] == $install_Dir . 'MCP23008/') {}
 
 // Custom boards
 else {
@@ -322,14 +326,12 @@ else {
                             </tbody>
                         </table>
                     </div>
-
 <?php
 
 // Print any additional guides from board.php
 if (!empty($board->guide)) echo $board->guide;
 
 ?>
-
                 </div>
             </div>
             
@@ -341,6 +343,6 @@ if (!empty($board->guide)) echo $board->guide;
         <p>Spotted a problem? Submit an Issue or a Pull Request on our <a href="https://github.com/plasmadancom/HAT-GUI">GitHub repository</a>!</p>
         <p>Built by <a href="https://plasmadan.com">PlasmaDan</a>. Tweet us at <a href="https://twitter.com/Plasma_Dan">@Plasma_Dan</a>.</p>
     </div>
-    <script src="/src/js/scripts.js"></script>
+    <script src="<?= dirPrefix($install_Dir) ?>src/js/scripts.js"></script>
 </body>
 </html>

@@ -139,9 +139,14 @@ $board->extension = $extension;
 
 $i2c_addr = $default_i2c_addr;
 
+// Return root relative directory prefix
+function dirPrefix($dir) {
+    return ($dir == $_SERVER['REQUEST_URI']) ? '' : '../';
+}
+
 // Return class for current page
 function cur_page($loc) {
-    return $loc == basename(strtok($_SERVER["REQUEST_URI"], '?')) ? ' class="active"' : '';
+    return $loc == basename(strtok($_SERVER['REQUEST_URI'], '?')) ? ' class="active"' : '';
 }
 
 // I2C Selection

@@ -93,6 +93,8 @@ if [ "$INSTALL_WEBROOT" = true ]
 else
 	mkdir /var/www/html/hats
 	svn checkout $GUI_FILES /var/www/html/hats
+    
+    update_file "$install_subdir = '';" "$install_subdir = 'hats';" "HAT-GUI subdirectory setting" "/var/www/html/hats/index.php"
 fi
 
 
@@ -110,6 +112,6 @@ echo "Restart apache..."
 systemctl restart apache2
 chmod -R 755 /var/www
 hostname -I
-echo "HAT-GUI Installed. Please reboot."
+echo "HAT-GUI Installed."
 
 exit 0

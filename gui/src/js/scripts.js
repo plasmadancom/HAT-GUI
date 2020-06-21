@@ -22,6 +22,7 @@ $(document).ready(function() {
     var demo_mode = $('#demo_mode').val() == 'true';
     var pinBase = parseInt($('#pin_base').val());
     var extension = $('#extension').val().toLowerCase();
+    var directory = $('#directory').val();
     
     // Return query string
     function get_query(q) {
@@ -275,7 +276,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url:'/src/inc/functions.php',
+            url: directory + 'src/inc/functions.php',
             data: {'toggle' : gpio, 'extension' : extension, 'pinbase' : pinBase, 'i2c' : i2c_addr()},
             dataType: 'json',
             timeout: 5000,
@@ -338,7 +339,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url:'/src/inc/functions.php',
+            url: directory + 'src/inc/functions.php',
             data: {'gpios' : gpios, 'write' : write, 'extension' : extension, 'pinbase' : pinBase, 'i2c' : i2c_addr()},
             dataType: 'json',
             timeout: 5000,
