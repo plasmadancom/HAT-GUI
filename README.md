@@ -24,7 +24,7 @@ Alternatively, you can install manually. See our [setup guide](#setup-guide).
 
 ## Add Your Own Board
 
-Fork this repository and copy any existing board within /src and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board. See notes within board.php for configuration details.
+Fork this repository and copy any existing board within /gui and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board. See notes within board.php for configuration details.
 
 You can use your own version of the easy installer to streamline installation of your custom board onto your Pi, simply edit install.sh and change GITHUB_USERNAME to your own.
 
@@ -98,7 +98,7 @@ Tip: For headless setup, SSH can be enabled by placing a file named 'ssh' (no ex
 
 ## Enable I2C
 
-I2C must be enabled in raspi-config to allow I2C based HATs to communcate with Raspberry Pi.
+I2C must be enabled in raspi-config to allow I2C based HATs to communicate with Raspberry Pi.
 
 ```
 sudo raspi-config
@@ -181,7 +181,15 @@ sudo apt install apache2 php libapache2-mod-php -y
 Enable mod_rewrite.
 
 ```
-a2enmod rewrite
+sudo a2enmod rewrite
+```
+
+Optional: Add i2c permissions to allow Apache access to i2c bus. Used purely to detect board connection status.
+
+```
+adduser www-data i2c
+chmod g+rw /dev/i2c-1
+echo 'KERNEL=="i2c-[0-1]*", GROUP="i2c"' | tee /etc/udev/rules.d/10-local_i2c_group.rules
 ```
 
 AllowOverride None is now default [since Apache 2.3.9](https://httpd.apache.org/docs/2.4/mod/core.html), we need to change it back to AllowOverride All.
@@ -204,7 +212,7 @@ Find `AllowOverride None` within `Directory /var/www/`.
 
 Change it to `AllowOverride All`.
 
-Save and exit nano, then restart apache.
+Save and exit nano, then restart Apache.
 
 ```
 sudo systemctl restart apache2
@@ -246,10 +254,10 @@ mkdir /var/www/html/hats
 sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui /var/www/html/hats
 ```
 
-Add subdirectory paramter to index.php.
+Add subdirectory parameter to index.php.
 
 ```
-sudo nano index.php
+sudo nano /var/www/html/hats/index.php
 ```
 
 Find `$install_subdir` near the top of the file, enter your subdirectory and save the file.

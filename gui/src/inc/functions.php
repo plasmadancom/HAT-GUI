@@ -22,9 +22,23 @@
 // Detect device
 function detect_i2c($i2c_addr) {
     // We'll use i2c-tools for this
-    exec("i2cget -y 1 $i2c_addr", $result);
+    exec("i2cget -y 1 $i2c_addr 2>&1", $r);
     
-    return (bool)$result[0];
+    // Permission problem
+    if (stripos($r[0], 'permission') !== false) {
+        // TODO: Add a fall-back using gpio read
+        
+        return;
+    }
+    
+    // i2c-tools read failed, board connection problem
+    if (stripos($r[0], 'failed') !== false) return false;
+    
+    // i2c-tools read success
+    if(preg_match("/^0x[\da-f]+$/i", $r[0])) return true;
+    
+    // Bail
+    return;
 }
 
 // Initialise GPIO

@@ -90,6 +90,14 @@ echo "Update AllowOverride None setting in $APACHE_CONF ..."
 
 perl -i -p0e "s/<Directory \/var\/www\/>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride None\n\tRequire all granted\n<\/Directory>/<Directory \/var\/www\/>\n\tOptions Indexes FollowSymLinks\n\tAllowOverride All\n\tRequire all granted\n<\/Directory>/gms" $APACHE_CONF
 
+echo "Add Apache to i2c group ..."
+adduser www-data i2c
+
+echo "Add i2c group permissions ..."
+chmod g+rw /dev/i2c-1
+
+echo "Create new udev rule 10-local_i2c_group.rules ..."
+echo 'KERNEL=="i2c-[0-1]*", GROUP="i2c"' | tee /etc/udev/rules.d/10-local_i2c_group.rules
 
 echo "Install HAT-GUI ..."
 

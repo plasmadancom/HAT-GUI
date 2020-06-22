@@ -23,7 +23,7 @@ $pinBase = 100;
 $demo_mode = false;
 $install_subdir = '';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $_SERVER['REQUEST_URI'] . 'board.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . strtok($_SERVER['REQUEST_URI'], '?') . 'board.php';
 require_once __DIR__ . '/src/inc/functions.php';
 
 $install_Dir = !empty($install_subdir) ? '/' . trim($install_subdir, '/') . '/' : '/';
@@ -114,7 +114,7 @@ foreach ($css_classes as $c) {
 
 $boards = array();
 
-// Scrape the web directory for addtional boards and include them
+// Scrape the web directory for additional boards and include them
 foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$install_Dir*", GLOB_ONLYDIR) as $dir) {
     $base = basename($dir);
     $loc = $install_Dir . ltrim($base, '/');
@@ -133,9 +133,12 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$install_Dir*", GLOB_ONLYDIR) as $dir
     
     // Print menu link to each board
 ?>
-                <li<?= cur_page($dir) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
+                <li<?= cur_page($base) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
 <?php
 }
+
+// Get i2c connection status
+$i2c_status = detect_i2c($i2c_addr);
 
 // Board connection status defaults
 $connection = '0x2' . ($i2c_addr-32);
@@ -149,13 +152,13 @@ if ($demo_mode !== false) {
 }
 
 // Connected
-else if (detect_i2c($i2c_addr)) {
+else if ($i2c_status === true) {
     $connection .= ' Connected';
     $connection_status .= ' connected';
 }
 
 // Not connected
-else {
+else if ($i2c_status === false) {
     $connection .= ' Not Found';
     $connection_status .= ' connection-error';
 }
