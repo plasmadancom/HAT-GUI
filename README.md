@@ -18,7 +18,7 @@ sudo wget https://git.plasmadan.com/install.sh
 sudo sh install.sh
 ```
 
-This script will automatically enable I2C, install the required packages and setup the Web GUI.
+This script will automatically enable I2C, install the required packages and setup HAT-GUI.
 
 Alternatively, you can install manually. See our [setup guide](#setup-guide).
 
@@ -135,21 +135,10 @@ For recent versions of the Raspberry Pi (3.18 kernel or later) you will need to 
 sudo sh -c "echo 'dtparam=i2c1=on' >> /boot/config.txt"
 ```
 
-You can increase the I2C bus speed by adding the i2c_baudrate paramter to `/boot/config.txt`.
+Optional: Increase the I2C bus speed by adding the i2c_baudrate paramter to `/boot/config.txt`, then reboot.
 
 ```
 sudo sh -c "echo 'dtparam=i2c_baudrate=400000' >> /boot/config.txt"
-```
-
-Add the 'pi' user to the I2C group to avoid having to run the I2C tools as root. This is usually default anyway.
-
-```
-sudo adduser pi i2c
-```
-
-Reboot your Raspberry Pi.
-
-```
 sudo reboot
 ```
 
@@ -189,6 +178,12 @@ sudo pip install wiringpi
 sudo apt install apache2 php libapache2-mod-php -y
 ```
 
+Enable mod_rewrite.
+
+```
+a2enmod rewrite
+```
+
 AllowOverride None is now default [since Apache 2.3.9](https://httpd.apache.org/docs/2.4/mod/core.html), we need to change it back to AllowOverride All.
 
 Edit apache2.conf.
@@ -197,7 +192,7 @@ Edit apache2.conf.
 sudo nano /etc/apache2/apache2.conf
 ```
 
-Find AllowOverride None within Directory /var/www/.
+Find `AllowOverride None` within `Directory /var/www/`.
 
 ```
 <Directory /var/www/>
@@ -207,7 +202,7 @@ Find AllowOverride None within Directory /var/www/.
 </Directory>
 ```
 
-Change it to AllowOverride All.
+Change it to `AllowOverride All`.
 
 Save and exit nano, then restart apache.
 
@@ -223,7 +218,7 @@ hostname -I
 
 ## Install HAT-GUI
 
-You need to clone the web GUI files from the /gui subfolder, to do that we need to install subversion.
+You need to clone the web GUI files from the `/gui` subdirectory, to do that we need to install subversion.
 
 **Note: The html files are for the live demo, you don't need to install them.**
 
@@ -235,34 +230,35 @@ Choose where to install HAT-GUI.
 
 ### Option 1: Install at Web Root
 
-Navigate to the web root.
+Empty default Apache files and install HAT-GUI.
 
 ```
-cd /var/www/html
-```
-
-Empty default Apache files.
-
-```
-sudo rm -rf *
+sudo rm -rf /var/www/html/*
+sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui /var/www/html
 ```
 
 ### Option 2: Subdirectory Install
 
-HAT-GUI can be installed in any subdirectory. In this example we'll create a new subdirectory /hats at the web root.
+HAT-GUI can be installed in any subdirectory. In this example we'll create a new subdirectory `hats`.
 
 ```
 mkdir /var/www/html/hats
-cd /var/www/html/hats
+sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui /var/www/html/hats
 ```
 
-### Checkout
-
-Install HAT-GUI here (you must include the period at the end).
+Add subdirectory paramter to index.php.
 
 ```
-sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui .
+sudo nano index.php
 ```
+
+Find `$install_subdir` near the top of the file, enter your subdirectory and save the file.
+
+```
+$install_subdir = 'hats';
+```
+
+### Permissions
 
 Be sure to set file permissions to 755 in the web directory.
 
