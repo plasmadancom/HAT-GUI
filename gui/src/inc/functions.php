@@ -141,17 +141,18 @@ if (isset($_POST) && !empty($_POST)) {
 // Allows us to include other board.php files without clashes
 
 $board = new stdClass();
-$board->board_name = $board_name;
-$board->page_title = $page_title;
+$board->board_name = !empty($board_name) ? $board_name : '';
+$board->page_title = !empty($page_title) ? $page_title : '';
 $board->description = !empty($description) ? $description : '';
 $board->image_url = !empty($image_url) ? $image_url : '';
 $board->github = !empty($github) ? $github : '';
 $board->buy = !empty($buy) ? $buy : '';
 $board->guide = !empty($guide) ? $guide : '';
 $board->intro = !empty($intro) ? $intro : '';
-$board->extension = $extension;
+$board->extension = !empty($extension) ? $extension : 'mcp23017';
 
-$i2c_addr = $default_i2c_addr;
+// Default i2c address from board.php
+$i2c_addr = isset($default_i2c_addr) ? $default_i2c_addr : 0x20;
 
 // Return root relative directory prefix
 function dirPrefix($dir) {
@@ -160,7 +161,7 @@ function dirPrefix($dir) {
 
 // Return class for current page
 function cur_page($loc) {
-    return $loc == basename(strtok($_SERVER['REQUEST_URI'], '?')) ? ' class="active"' : '';
+    return $loc == strtok($_SERVER['REQUEST_URI'], '?') ? ' class="active"' : '';
 }
 
 // I2C Selection
@@ -222,10 +223,10 @@ foreach ($pins as $pin => $i) {
         else $p['data'] .= ' data-mode="unconfigured"';
         
         // Initialise GPIO with mode
-        if($mode !== false) init_gpio($gpio, $mode, $extension, $pinBase, $i2c_addr);
+        if($mode !== false) init_gpio($gpio, $mode, $board->extension, $pinBase, $i2c_addr);
         
         // Read GPIO status
-        $logic = gpio($gpio, $extension, $pinBase, $i2c_addr, $demo_mode);
+        $logic = gpio($gpio, $board->extension, $pinBase, $i2c_addr, $demo_mode);
         $led = (bool)$logic !== false ? ' on' : '';
         
         $p['data'] .=  ' data-gpio="' . $gpio . '" data-logic="' . $logic . '"';

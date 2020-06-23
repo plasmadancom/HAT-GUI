@@ -21,12 +21,11 @@
 
 $pinBase = 100;
 $demo_mode = false;
-$install_subdir = '';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . strtok($_SERVER['REQUEST_URI'], '?') . 'board.php';
 require_once __DIR__ . '/src/inc/functions.php';
 
-$install_Dir = !empty($install_subdir) ? '/' . trim($install_subdir, '/') . '/' : '/';
+$root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
 
 ?>
 <!doctype html>
@@ -44,15 +43,15 @@ $install_Dir = !empty($install_subdir) ? '/' . trim($install_subdir, '/') . '/' 
     <meta property="og:title" content="<?= $board->page_title ?>">
     <meta property="og:description" content="<?= $board->description ?>">
     <meta property="og:image" content="<?= $board->image_url ?>">
-    <meta property="og:url" content="<?= 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}" ?>">
+    <meta property="og:url" content="<?= 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>">
     <meta property="og:site_name" content="HAT-GUI">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image:alt" content="HAT-GUI - Interactive UI &amp; Pinout Guide">
     
-    <link href="<?= dirPrefix($install_Dir) ?>src/css/style.css" rel="stylesheet">
+    <link href="<?= dirPrefix($root_dir) ?>src/css/style.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <script src="<?= dirPrefix($install_Dir) ?>src/js/jquery.min.js"></script>
+    <script src="<?= dirPrefix($root_dir) ?>src/js/jquery.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
@@ -60,7 +59,7 @@ $install_Dir = !empty($install_subdir) ? '/' . trim($install_subdir, '/') . '/' 
     <input id="demo_mode" type="hidden" value="<?= $demo_mode ? 'true' : 'false' ?>">
     
     <!-- Settings -->
-    <input id="directory" type="hidden" value="<?= $install_Dir ?>">
+    <input id="directory" type="hidden" value="<?= $root_dir ?>">
     <input id="pin_base" type="hidden" value="<?= $pinBase ?>">
     <input id="extension" type="hidden" value="<?= $board->extension ?>">
     <div class="container">
@@ -108,16 +107,16 @@ foreach ($css_classes as $c) {
         </div>
         <div class="page">
             <ul class="menu">
-                <li<?= cur_page('') ?>><a href="<?= $install_Dir ?>">MCP23017</a>
-                <li<?= cur_page('MCP23008') ?>><a href="<?= $install_Dir ?>MCP23008">MCP23008</a>
+                <li<?= cur_page($root_dir) ?>><a href="<?= $root_dir ?>">MCP23017</a>
+                <li<?= cur_page($root_dir . 'MCP23008/') ?>><a href="<?= $root_dir ?>MCP23008/">MCP23008</a>
 <?php
 
 $boards = array();
 
 // Scrape the web directory for additional boards and include them
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$install_Dir*", GLOB_ONLYDIR) as $dir) {
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$root_dir*", GLOB_ONLYDIR) as $dir) {
     $base = basename($dir);
-    $loc = $install_Dir . ltrim($base, '/');
+    $loc = $root_dir . $base . '/';
     
     // Ignore these
     if ($base == 'MCP23008' or $base == 'src' or !file_exists($base . '/board.php')) continue;
@@ -126,14 +125,14 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$install_Dir*", GLOB_ONLYDIR) as $dir
     include $base . '/board.php';
     
     // If a board image exists, use it
-    $board_img = file_exists($base . '/img/board.png') ? '<img src="' . $loc . '/img/board.png" alt="' . $board_name . '">' : '';
+    $board_img = file_exists($base . '/img/board.png') ? '<img src="' . $loc . 'img/board.png" alt="' . $board_name . '">' : '';
     
     // Save for later
     $boards[$board_name] = ['dir' => $loc, 'img' => $board_img];
     
     // Print menu link to each board
 ?>
-                <li<?= cur_page($base) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
+                <li<?= cur_page($loc) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
 <?php
 }
 
@@ -172,7 +171,7 @@ else if ($i2c_status === false) {
 if (!empty($board->intro)) echo $board->intro;
 
 // Main page
-if ($_SERVER['REQUEST_URI'] == $install_Dir) {
+if ($_SERVER['REQUEST_URI'] == $root_dir) {
 ?>
                     <h2>Boards</h2>
                     <ul class="boards">
@@ -190,7 +189,7 @@ if ($_SERVER['REQUEST_URI'] == $install_Dir) {
 }
 
 // MCP23008 Page
-else if ($_SERVER['REQUEST_URI'] == $install_Dir . 'MCP23008/') {}
+else if ($_SERVER['REQUEST_URI'] == $root_dir . 'MCP23008/') {}
 
 // Custom boards
 else {
@@ -346,6 +345,6 @@ if (!empty($board->guide)) echo $board->guide;
         <p>Spotted a problem? Submit an Issue or a Pull Request on our <a href="https://github.com/plasmadancom/HAT-GUI">GitHub repository</a>!</p>
         <p>Built by <a href="https://plasmadan.com">PlasmaDan</a>. Tweet us at <a href="https://twitter.com/Plasma_Dan">@Plasma_Dan</a>.</p>
     </div>
-    <script src="<?= dirPrefix($install_Dir) ?>src/js/scripts.js"></script>
+    <script src="<?= dirPrefix($root_dir) ?>src/js/scripts.js"></script>
 </body>
 </html>

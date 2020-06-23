@@ -1,3 +1,5 @@
+![php 5.4+](https://img.shields.io/badge/php-v5.4%2B-blue) [![maintained](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/plasmadancom/HAT-GUI/graphs/commit-activity) ![licence](https://img.shields.io/github/license/plasmadancom/HAT-GUI) [![demo](https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=demo&up_color=green&up_message=online&url=https%3A%2F%2Fio.plasmadan.com)](https://io.plasmadan.com)
+
 # HAT-GUI
 <p align="center">
     <a href="https://io.plasmadan.com" target="_blank" rel="nofollow">
@@ -252,18 +254,6 @@ HAT-GUI can be installed in any subdirectory. In this example we'll create a new
 ```
 mkdir /var/www/html/hats
 sudo svn checkout https://github.com/plasmadancom/HAT-GUI/trunk/gui /var/www/html/hats
-```
-
-Add subdirectory parameter to index.php.
-
-```
-sudo nano /var/www/html/hats/index.php
-```
-
-Find `$install_subdir` near the top of the file, enter your subdirectory and save the file.
-
-```
-$install_subdir = 'hats';
 ```
 
 ### Permissions
