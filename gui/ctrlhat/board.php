@@ -91,7 +91,7 @@ $pins = array (
 );
 
 // Guides listed in pin setup above are defined here as html blocks.
-// This will be displayed when the assiciated pin is selected.
+// This will be displayed when the associated pin is selected.
 // Guides can be used for multiple pins by chaining the classes together.
 // Some default guides are included on index.php.
 
@@ -100,7 +100,7 @@ ob_start(); ?>
                     <!-- Link jumper -->
                     <div class="guide link">
                         <h3>Isolating the Relays</h3>
-                        <p>Removing the LINK jumper disconnects 5V power to the relays. This allows you to power the relays independently, but also gives you the option to use solid state relays with other DC control voltages (up to 30V). This opens up a huge range of additional compatible solid state relays for use with your project.</p>
+                        <p>Removing the LINK jumper will disconnect 5V power to the relays. This allows you to power the relays independently, but also gives you the option to use solid state relays with other DC control voltages (up to 30V). This opens up a huge range of additional compatible solid state relays for use with your project.</p>
                     </div>
                     
                     <!-- 3v3 jumper -->

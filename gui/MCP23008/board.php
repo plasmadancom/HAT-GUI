@@ -77,7 +77,7 @@ $pins = array (
 
 
 // Guides listed in pin setup above are defined here as html blocks.
-// This will be displayed when the assiciated pin is selected.
+// This will be displayed when the associated pin is selected.
 // Guides can be used for multiple pins by chaining the classes together.
 // Some default guides are included on index.php.
 /*

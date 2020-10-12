@@ -38,10 +38,12 @@ body {
     position: relative;
     text-align: left;
     padding: 0 10px 10px 10px;
+    margin-top: 65px;
     width: 600px;
     height: 518px;
     font-size: 1.2em;
     transform: translate(-50%, 0) scale(0.5);
+    transform-origin: top center;
     left: 50%;
 }
 
