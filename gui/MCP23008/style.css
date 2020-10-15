@@ -1,36 +1,3 @@
-.pinout, .overlay {
-    position: relative;
-    height: 518px;
-    float: left;
-}
-
-.pinout {
-    width: 600px;
-}
-
-.pinout:before, .pinout:after, .overlay:before, .overlay:after {
-    content: '';
-    display: block;
-    width: 27px;
-    height: 27px;
-    background: #fff;
-    border-radius: 50%;
-    border: 16px solid #f7df84;
-    position: absolute;
-    top: 3px;
-    left: 3px;
-}
-
-.pinout:after, .overlay:after {
-    top: auto;
-    bottom: 3px;
-}
-
-.overlay:before, .overlay:after {
-    left: auto;
-    right: 3px;
-}
-
 .gpiobase {
     position: absolute;
     width: 68px;
@@ -65,134 +32,93 @@
     transform: rotate(90deg);
 }
 
-.gpios {
-    position: relative;
-}
-
-.gpios ul {
-    position: absolute;
-    list-style: none;
+.io ul {
     width: 24px;
     top: 5px;
 }
 
-.gpios li {
-    position: relative;
-    display: block;
-    width: 16px;
-    height: 16px;
-    margin: 0 7.5px 7.5px 0;
-    float: left;
-}
-
-.gpios a {
-    display: block;
-    position: relative;
-    font-size: 1em;
-    line-height: 23px;
-    height: 22px;
-    margin-bottom: 1.5px;
-}
-
-.gpios .num {
-    color: #073642;
-    font-size: .8em;
-    opacity: .8;
-    text-indent: 0;
-    position: absolute;
+.io .num {
     left: 25px;
 }
 
-.gpios .pin {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border: 1px solid transparent;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
+.io .pin {
+    background: none;
     right: -2px;
 }
 
-.gpios .on .pin {
-    background: none;
-}
-
-.gpios .pin:after {
-    content: '';
-    position: absolute;
+.io .pin:after {
     width: 4px;
     height: 12px;
-    background: #fdf6e3;
     top: 2px;
     left: 3px;
+    border-radius: 0;
 }
 
-.gpios .on a:after, .gpios .pullup a:after {
+.io .on a:after, .io .pullup a:after {
     content: '(active)';
     position: absolute;
     top: -1px;
-    right: 60px;
+    right: 62px;
 }
 
-.gpios .pullup a:after {
+.io .pullup a:after {
     content: '(pullup)';
 }
 
-.gpios .on:nth-child(n+10) a:after {
+.io .on:nth-child(n+10) a:after {
     left: 60px;
 }
 
-.gpios li {
+.io li {
     position: relative;
     text-indent: 60px;
 }
 
-.gpios li a {
+.io li a {
     width: 150px;
     color: #e9e5d2;
 }
 
-.gpios li:nth-child(-n+9) {
+.io li:nth-child(-n+9) {
     left: -144px;
 }
 
-.gpios li:nth-child(-n+9) a {
+.io li:nth-child(-n+9) a {
     direction: rtl;
     text-align: right;
     border-top-right-radius: 13px;
     border-bottom-right-radius: 13px;
 }
 
-.gpios li:nth-child(-n+9) .num {
+.io li:nth-child(-n+9) .num {
     left: auto;
     right: 26px;
 }
 
-.gpios li:nth-child(n+10) {
+.io li:nth-child(n+10) {
     left: 64px;
     top: -211px;
 }
 
-.gpios li:nth-child(n+10) a {
+.io li:nth-child(n+10) a {
     border-top-left-radius: 13px;
     border-bottom-left-radius: 13px;
 }
 
-.gpios li .num {
+.io li .num {
     color: #ccc;
 }
 
-.gpios li:nth-child(n+10) .pin {
+.io li:nth-child(n+10) .pin {
     left: 2px;
     top: 2px;
 }
 
-.gpios a:hover, .gpios .active a {
-    color: #063541 !important;
+.io a:hover, .io .active a {
+    color: #063541;
 }
 
-.gpios li a:hover:before, .gpios .active a:before {
+.io li a:hover:before, .io .active a:before {
     content: '';
     position: absolute;
     width: 160px;
@@ -204,21 +130,15 @@
     z-index: -1;
 }
 
-.gpios li:nth-child(n+10) a:hover:before, .gpios .active:nth-child(n+10) a:before {
+.io li:nth-child(n+10) a:hover:before, .io .active:nth-child(n+10) a:before {
     border-radius: 10px 0 0 10px;
     left: 18px;
 }
 
-.gpios a:hover .num, .gpios .active .num {
-    color: #073642 !important;
+.io a:hover .num, .io .active .num {
+    color: #073642;
 }
 
-.gpios li a small {
-    direction: ltr;
-    unicode-bidi: embed;
-    font-size: .7em;
-}
-
-.gpios .reset {
+.io .reset {
     text-decoration: overline;
 }

@@ -52,7 +52,6 @@ $root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
     <link href="<?= dirPrefix($root_dir) ?>src/css/style.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script src="<?= dirPrefix($root_dir) ?>src/js/jquery.min.js"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
     <!-- Demo mode -->
@@ -64,11 +63,6 @@ $root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
     <input id="extension" type="hidden" value="<?= $board->extension ?>">
     <div class="container">
         <div class="float wrapper">
-            <!-- GitHub Buttons -->
-            <div class="github">
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI/fork" data-icon="octicon-repo-forked" data-size="large">Fork on GitHub</a>
-            </div>
             <div class="orientation">
                 <div class="board">
                     <div class="header">
@@ -76,7 +70,7 @@ $root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
                     </div>
                     <div class="pinout">
                         <div class="gpiobase">
-                            <div class="gpios">
+                            <div class="io<?= ($root_dir == strtok($_SERVER['REQUEST_URI'], '?') or $root_dir . 'MCP23008/' == strtok($_SERVER['REQUEST_URI'], '?')) ? '' : ' gpios'; ?>">
                                 <ul>
 <?php
 
@@ -125,15 +119,38 @@ foreach (glob($_SERVER['DOCUMENT_ROOT'] . "$root_dir*", GLOB_ONLYDIR) as $dir) {
     include $base . '/board.php';
     
     // If a board image exists, use it
-    $board_img = file_exists($base . '/img/board.png') ? '<img src="' . $loc . 'img/board.png" alt="' . $board_name . '">' : '';
+    $board_img = file_exists($base . '/img/board.png') ? '<img src="' . $loc . 'img/board.png" alt="' . $board_name . '">' : '<img src="/src/img/board.png" alt="' . $board_name . '">';
     
     // Save for later
     $boards[$board_name] = ['dir' => $loc, 'img' => $board_img];
-    
-    // Print menu link to each board
+}
+
+// Create drop-down menu
+if (count($boards) > 2) {
 ?>
-                <li<?= cur_page($loc) ?>><a href="<?= $loc ?>"><?= $board_name ?></a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Boards <i class="caret"></i></a>
+                    <div class="dropdown-content">
 <?php
+    // Print menu link to each board
+    foreach ($boards as $name => $b) {
+?>
+                        <a<?= cur_page($b['dir']) ?> href="<?= $b['dir'] ?>"><?= $name ?></a>
+<?php
+    }
+?>
+                    </div>
+                </li>
+<?php
+}
+
+// Print menu link to each board
+else {
+    foreach ($boards as $name => $b) {
+?>
+                <li<?= cur_page($b['dir']) ?>><a href="<?= $b['dir'] ?>"><?= $name ?></a></li>
+<?php
+    }
 }
 
 // Get i2c connection status
@@ -170,26 +187,37 @@ else if ($i2c_status === false) {
 // Print intro html from board.php
 if (!empty($board->intro)) echo $board->intro;
 
-// Main page
-if ($_SERVER['REQUEST_URI'] == $root_dir) {
+// Main pages
+if ($_SERVER['REQUEST_URI'] == $root_dir or $_SERVER['REQUEST_URI'] == $root_dir . 'MCP23008/') {
+    // No point showing installer guide if already installed
+    if ($demo_mode) {
+?>
+                    <h2>Easy Installer</h2>
+                    <p>Our easy installer takes care of the setup process automatically.</p>
+                    <pre class="bash">
+<span class="code-highlight">sudo wget</span> https://git.plasmadan.com/install.sh
+<span class="code-highlight">sudo sh</span> install.sh</pre>
+                    <p>This script will automatically enable I2C, install the required packages and setup the Web GUI.</p>
+                    <p>Alternatively, you can install manually. See our <a href="https://github.com/plasmadancom/HAT-GUI#setup-guide">setup guide</a>.</p>
+<?php
+    }
+    
+    if (count($boards) > 0) {
 ?>
                     <h2>Boards</h2>
                     <ul class="boards">
 <?php
-    // Print list of each board with image if available
-    foreach ($boards as $n => $b) {
+        // Print list of each board with image if available
+        foreach ($boards as $n => $b) {
 ?>
                         <li><a href="<?= $b['dir'] ?>"><?= $b['img'] ?><span><?= $n ?></span></a></li>
 <?php
-    }
+        }
 ?>
                     </ul>
-                    <div class="clear"></div>
 <?php
+    }
 }
-
-// MCP23008 Page
-else if ($_SERVER['REQUEST_URI'] == $root_dir . 'MCP23008/') {}
 
 // Custom boards
 else {

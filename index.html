@@ -24,7 +24,6 @@
     <link href="gui/src/css/style.css" rel="stylesheet">
     <link href="gui/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
     <!-- Demo mode -->
@@ -36,11 +35,6 @@
     <input id="extension" type="hidden" value="mcp23017">
     <div class="container">
         <div class="float wrapper">
-            <!-- GitHub Buttons -->
-            <div class="github">
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI/fork" data-icon="octicon-repo-forked" data-size="large">Fork on GitHub</a>
-            </div>
             <div class="orientation">
                 <div class="board">
                     <div class="header">
@@ -48,7 +42,7 @@
                     </div>
                     <div class="pinout">
                         <div class="gpiobase">
-                            <div class="gpios">
+                            <div class="io">
                                 <ul>
                                     <li class="pin1 gpio8"><a href="#" data-pin="1" data-mode="out" data-gpio="8" data-logic="0" data-name="GPB 0"><span class="num">1</span> GPB 0<span class="pin"></span></a></li>
                                     <li class="pin2 gpio9"><a href="#" data-pin="2" data-mode="out" data-gpio="9" data-logic="0" data-name="GPB 1"><span class="num">2</span> GPB 1<span class="pin"></span></a></li>
@@ -67,7 +61,7 @@
                                     <li class="pin15 i2c-a0"><a href="#" data-pin="15" data-guide="i2c-a0" data-mode="i2c" data-name="A0 I&sup2;C Address Selection)"><span class="num">15</span> A0<span class="pin"></span></a></li>
                                     <li class="pin16 i2c-a1"><a href="#" data-pin="16" data-guide="i2c-a1" data-mode="i2c" data-name="A1 I&sup2;C Address Selection)"><span class="num">16</span> A1<span class="pin"></span></a></li>
                                     <li class="pin17 i2c-a2"><a href="#" data-pin="17" data-guide="i2c-a2" data-mode="i2c" data-name="A2 I&sup2;C Address Selection)"><span class="num">17</span> A2<span class="pin"></span></a></li>
-                                    <li class="pin18"><a href="#" data-pin="18" data-name="Reset"><span class="num">18</span> RESET<span class="pin"></span></a></li>
+                                    <li class="pin18 reset"><a href="#" data-pin="18" data-name="Reset"><span class="num">18</span> RESET<span class="pin"></span></a></li>
                                     <li class="pin19"><a href="#" data-pin="19" data-name="Interupt B"><span class="num">19</span> IB<span class="pin"></span></a></li>
                                     <li class="pin20"><a href="#" data-pin="20" data-name="Interupt A"><span class="num">20</span> IA<span class="pin"></span></a></li>
                                     <li class="pin21 gpio0"><a href="#" data-pin="21" data-mode="out" data-gpio="0" data-logic="0" data-name="GPA 0"><span class="num">21</span> GPA 0<span class="pin"></span></a></li>
@@ -83,6 +77,7 @@
                         </div>
                     </div>
                     <div class="overlay">
+                        <div class="pin18 reset dynamic-overlay"></div>
                     </div>
                 </div>
             </div>
@@ -90,8 +85,15 @@
         <div class="page">
             <ul class="menu">
                 <li class="active"><a href="/">MCP23017</a>
-                <li><a href="/MCP23008">MCP23008</a>
-                <li><a href="/ctrlhat">CTRL HAT</a>
+                <li><a href="/MCP23008/">MCP23008</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Boards <i class="caret"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/30arelayhat/">30A Relay HAT</a>
+                        <a href="/appliancehat/">Appliance HAT</a>
+                        <a href="/ctrlhat/">CTRL HAT</a>
+                    </div>
+                </li>
                 <li class="demo_label"><a href="#">Demo<span class="demo_tooltip">Test environment to demo the GUI without a Raspberry Pi.</span></a>
             </ul>
             <div class="page-wrapper">
@@ -108,9 +110,11 @@
                     <p>Alternatively, you can install manually. See our <a href="https://github.com/plasmadancom/HAT-GUI#setup-guide">setup guide</a>.</p>
                     <h2>Boards</h2>
                     <ul class="boards">
-                        <li><a href="/ctrlhat"><img src="gui/ctrlhat/img/board.png" alt="CTRL HAT"><span>CTRL HAT</span></a></li>
+                        <li><a href="/30arelayhat/"><img src="gui/src/img/board.png" alt="30A Relay HAT"><span>30A Relay HAT</span></a></li>
+                        <li><a href="/appliancehat/"><img src="gui/src/img/board.png" alt="Appliance HAT"><span>Appliance HAT</span></a></li>
+                        <li><a href="/ctrlhat/"><img src="gui/ctrlhat/img/board.png" alt="CTRL HAT"><span>CTRL HAT</span></a></li>
                     </ul>
-                    <div class="clear"></div>
+                                             
                 </div>
                 <div class="guides">
                     

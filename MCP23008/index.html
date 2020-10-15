@@ -24,7 +24,6 @@
     <link href="../gui/src/css/style.css" rel="stylesheet">
     <link href="../gui/MCP23008/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
     <!-- Demo mode -->
@@ -36,11 +35,6 @@
     <input id="extension" type="hidden" value="mcp23008">
     <div class="container">
         <div class="float wrapper">
-            <!-- GitHub Buttons -->
-            <div class="github">
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI" data-icon="octicon-star" data-size="large" data-show-count="true">Star</a>
-                <a class="github-button" href="https://github.com/plasmadancom/HAT-GUI/fork" data-icon="octicon-repo-forked" data-size="large">Fork on GitHub</a>
-            </div>
             <div class="orientation">
                 <div class="board">
                     <div class="header">
@@ -48,7 +42,7 @@
                     </div>
                     <div class="pinout">
                         <div class="gpiobase">
-                            <div class="gpios">
+                            <div class="io">
                                 <ul>
                                     <li class="pin1"><a href="#" data-pin="1" data-name="SCL (I&sup2;C CLOCK)"><span class="num">1</span> SCL<span class="pin"></span></a></li>
                                     <li class="pin2"><a href="#" data-pin="2" data-name="SDA (I&sup2;C DATA)"><span class="num">2</span> SDA<span class="pin"></span></a></li>
@@ -80,15 +74,35 @@
         <div class="page">
             <ul class="menu">
                 <li><a href="/">MCP23017</a>
-                <li class="active"><a href="/MCP23008">MCP23008</a>
-                <li><a href="/ctrlhat">CTRL HAT</a>
+                <li class="active"><a href="/MCP23008/">MCP23008</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Boards <i class="caret"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/30arelayhat/">30A Relay HAT</a>
+                        <a href="/appliancehat/">Appliance HAT</a>
+                        <a href="/ctrlhat/">CTRL HAT</a>
+                    </div>
+                </li>
                 <li class="demo_label"><a href="#">Demo<span class="demo_tooltip">Test environment to demo the GUI without a Raspberry Pi.</span></a>
             </ul>
             <div class="page-wrapper">
                 <div class="intro">
                     <h1>MCP23008</h1><span class="connection">0x20</span>
-                    <p>The MCP23008 is an alternative to the MCP23017 with 8 GPIOs instead of 16. Since it works the same way and is supported in WiringPi we've added it here.</p>
-                    <p>Some of our future boards are based on the QFN package variant of the MCP23008 due its tiny footprint.</p>
+                    <p>The MCP23008 is an alternative to the MCP23017 with 8 GPIOs instead of 16.</p>
+                    <p>This gives it a considerable footprint advantage compared to the MCP23017, in particular the QFN package variant which made it possible for us to squeeze two huge 30A relays onto our <a href="/30arelayhat/">30A Relay HAT</a>.</p>
+                    <h2>Easy Installer</h2>
+                    <p>Our easy installer takes care of the setup process automatically.</p>
+                    <pre class="bash">
+<span class="code-highlight">sudo wget</span> https://git.plasmadan.com/install.sh
+<span class="code-highlight">sudo sh</span> install.sh</pre>
+                    <p>This script will automatically enable I2C, install the required packages and setup the Web GUI.</p>
+                    <p>Alternatively, you can install manually. See our <a href="https://github.com/plasmadancom/HAT-GUI#setup-guide">setup guide</a>.</p>
+                    <h2>Boards</h2>
+                    <ul class="boards">
+                        <li><a href="/30arelayhat/"><img src="../gui/src/img/board.png" alt="30A Relay HAT"><span>30A Relay HAT</span></a></li>
+                        <li><a href="/appliancehat/"><img src="../gui/src/img/board.png" alt="Appliance HAT"><span>Appliance HAT</span></a></li>
+                        <li><a href="/ctrlhat/"><img src="../gui/ctrlhat/img/board.png" alt="CTRL HAT"><span>CTRL HAT</span></a></li>
+                    </ul>
                 </div>
                 <div class="guides">
                     

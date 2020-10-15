@@ -72,7 +72,7 @@ $pins = array (
     ['A0 I&sup2;C Address Selection)',        'A0',             'guide' => 'i2c-a0'],
     ['A1 I&sup2;C Address Selection)',        'A1',             'guide' => 'i2c-a1'],
     ['A2 I&sup2;C Address Selection)',        'A2',             'guide' => 'i2c-a2'],
-    ['Reset',                                 'RESET'],
+    ['Reset',                                 'RESET',          'css' => 'reset'],
     ['Interupt B',                            'IB'],
     ['Interupt A',                            'IA'],
     ['GPA 0',                                 'GPA 0',          'gpio' => 0],
@@ -105,11 +105,4 @@ $guide = ob_get_clean();
 ob_start(); ?>
                     <p>Pinout guide &amp; interactive web GUI for MCP23017 and MCP23008 based Raspberry Pi expansion boards. Select a pin from the board to get started.</p>
                     <p>You can now add your own boards! Check-out our guide on <a href="https://github.com/plasmadancom/HAT-GUI#add-your-own-board">GitHub</a>.</p>
-                    <h2>Easy Installer</h2>
-                    <p>Our easy installer takes care of the setup process automatically.</p>
-                    <pre class="bash">
-<span class="code-highlight">sudo wget</span> https://git.plasmadan.com/install.sh
-<span class="code-highlight">sudo sh</span> install.sh</pre>
-                    <p>This script will automatically enable I2C, install the required packages and setup the Web GUI.</p>
-                    <p>Alternatively, you can install manually. See our <a href="https://github.com/plasmadancom/HAT-GUI#setup-guide">setup guide</a>.</p>
 <?php $intro = ob_get_clean(); ?>

@@ -93,6 +93,6 @@ $guide = ob_get_clean();
 // Any relevant information about the board
 
 ob_start(); ?>
-                    <p>The MCP23008 is an alternative to the MCP23017 with 8 GPIOs instead of 16. Since it works the same way and is supported in WiringPi we've added it here.</p>
-                    <p>Some of our future boards are based on the QFN package variant of the MCP23008 due its tiny footprint.</p>
+                    <p>The MCP23008 is an alternative to the MCP23017 with 8 GPIOs instead of 16.</p>
+                    <p>This gives it a considerable footprint advantage compared to the MCP23017, in particular the QFN package variant which made it possible for us to squeeze two huge 30A relays onto our <a href="/30arelayhat/">30A Relay HAT</a>.</p>
 <?php $intro = ob_get_clean(); ?>

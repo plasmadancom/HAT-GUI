@@ -1,0 +1,111 @@
+.board {
+    padding-left: 130px;
+}
+
+.board:before {
+    background-image: url("img/overlay.png");
+}
+
+.pinout {
+    width: 500px;
+}
+
+.overlay {
+    width: 100px;
+}
+
+.gpiobase {
+    width: 48px;
+    height: 169px;
+    top: 69px;
+    left: 8px;
+}
+
+.gpiobase:before {
+    content: '';
+    width: 48px;
+    height: 98px;
+    background: #2d3436;
+    position: absolute;
+    left: 280px;
+}
+
+.gpios li:nth-child(even) {
+    text-indent: 62px;
+}
+
+.gpios li:nth-child(n+17) a {
+    width: 100px;
+    color: #e9e5d2;
+}
+
+.gpios li:nth-child(even) .num, .gpios li:nth-child(2n+17) .num {
+    color: #ccc;
+    right: 30px;
+}
+
+.gpios li.gpio0, .gpios li.gpio1 {
+    display: none;
+}
+
+.gpios li:nth-child(n+17) a {
+    position: relative;
+    left: 280px;
+    top: -164.5px;
+}
+
+.gpios li:nth-child(2n+17) a {
+    position: relative;
+    left: 338px;
+    top: -164.5px;
+}
+
+.overlay .dynamic-led {
+    width: 16px;
+    height: 16px;
+    background: #c2321d;
+    top: 64px;
+    left: -302px;
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.overlay .led1 {
+    left: -16px;
+}
+
+.overlay .relay0, .overlay .relay1 {
+    width: 190px;
+    height: 295px;
+    background: #2d3436;
+    position: absolute;
+    top: 95px;
+    left: -430px;
+    border-radius: 10px 10px 0 0;
+}
+
+.overlay .relay1 {
+    left: -150px;
+    background: #2d3436;
+}
+
+.overlay .relay0:before, .overlay .relay1:before, .overlay .relay0:after, .overlay .relay1:after {
+    content: '';
+    background: #2d3436;
+    position: absolute;
+    bottom: 0;
+}
+
+.overlay .relay0:before, .overlay .relay1:before {
+    width: 20px;
+    height: 135px;
+    left: -19px;
+    border-radius: 10px 0 0 10px;
+}
+
+.overlay .relay0:after, .overlay .relay1:after {
+    width: 36px;
+    height: 170px;
+    right: -35px;
+    border-radius: 0 10px 10px 0;
+}
