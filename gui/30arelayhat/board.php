@@ -57,13 +57,11 @@ $default_pinMode = 'out';
 
 $pins = array (
     ['LINK (Solid State Relay Power Jumper)',                                      'guide' => 'link'],
-    ['LINK (Solid State Relay Power Jumper)',     'LINK',                                 'guide' => 'link'],
+    ['LINK (Solid State Relay Power Jumper)',     'LINK',                          'guide' => 'link'],
     ['3V3 (3.3V GPIO Selection Jumper)',                                           'guide' => '3v3'],
-    ['3V3 (3.3V GPIO Selection Jumper)',          '3V3',                                 'guide' => '3v3'],
+    ['3V3 (3.3V GPIO Selection Jumper)',          '3V3',                           'guide' => '3v3'],
     ['5V (5V GPIO Selection Jumper)',                                              'guide' => '5v'],
-    ['5V (5V GPIO Selection Jumper)',             '5V',                                 'guide' => '5v'],
-    ['GP 0 (Relay CH0)',                          'GP 0 <small>(CH0)</small>',     'gpio' => 0,     'mode' => 'out',     'css' => 'relay0 led0'],
-    ['GP 1 (Relay CH1)',                          'GP 1 <small>(CH1)</small>',     'gpio' => 1,     'mode' => 'out',     'css' => 'relay1 led1'],
+    ['5V (5V GPIO Selection Jumper)',             '5V',                            'guide' => '5v'],
     ['GP 2 (Relay CH2)',                          'GP 2',                          'gpio' => 2],
     ['GP 3 (Relay CH3)',                          'GP 3',                          'gpio' => 3],
     ['GP 4 (Relay CH4)',                          'GP 4',                          'gpio' => 4],
@@ -80,6 +78,8 @@ $pins = array (
     ['A1 (I&sup2;C Address Selection Jumper)',    'A1',                            'guide' => 'i2c-a1'],
     ['A2 (I&sup2;C Address Selection Jumper)',                                     'guide' => 'i2c-a2'],
     ['A2 (I&sup2;C Address Selection Jumper)',    'A2',                            'guide' => 'i2c-a2'],
+    ['GP 0 (Relay CH0)',                          'GP 0 <small>(CH0)</small>',     'gpio' => 0,     'mode' => 'out',     'css' => 'relay0 led0'],
+    ['GP 1 (Relay CH1)',                          'GP 1 <small>(CH1)</small>',     'gpio' => 1,     'mode' => 'out',     'css' => 'relay1 led1']
 );
 
 // Guides listed in pin setup above are defined here as html blocks.

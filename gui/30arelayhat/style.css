@@ -34,12 +34,12 @@
     text-indent: 62px;
 }
 
-.gpios li:nth-child(n+17) a {
+.gpios li:nth-child(n+15) a {
     width: 100px;
     color: #e9e5d2;
 }
 
-.gpios li:nth-child(even) .num, .gpios li:nth-child(2n+17) .num {
+.gpios li:nth-child(even) .num, .gpios li:nth-child(2n+15) .num {
     color: #ccc;
     right: 30px;
 }
@@ -48,13 +48,13 @@
     display: none;
 }
 
-.gpios li:nth-child(n+17) a {
+.gpios li:nth-child(n+15) a {
     position: relative;
     left: 280px;
     top: -164.5px;
 }
 
-.gpios li:nth-child(2n+17) a {
+.gpios li:nth-child(2n+15) a {
     position: relative;
     left: 338px;
     top: -164.5px;
