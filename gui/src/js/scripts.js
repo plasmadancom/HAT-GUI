@@ -20,6 +20,7 @@
 $(document).ready(function() {
     // Parse settings from DOM
     var demo_mode = $('#demo_mode').val() == 'true';
+    var button_mode = $('#button_mode').val() == 'false';
     var pinBase = parseInt($('#pin_base').val());
     var extension = $('#extension').val().toLowerCase();
     var directory = $('#directory').val();
@@ -216,7 +217,6 @@ $(document).ready(function() {
         }
         
         // Update DOM
-        $('.page').attr('class', 'page pindata' + gpio);
         $('.guides .pinname').html(name);
         $('.guides .physpin').html(pin);
         $('.guides .pinbase').html(pinBase);
@@ -230,33 +230,8 @@ $(document).ready(function() {
         $('.guides .i2c-table a[href="?i2c=' + i2c_addr() + '"]').closest('tr').addClass('selected');
     }
     
-    // Click on pin
-    $('.board a').on('click', function(e) {
-        e.preventDefault();
-        
-        pin_click($(this));
-    });
-    
-    // Click on dynamic block (relay, led etc)
-    $('.overlay div').on('click', function(e) {
-        e.preventDefault();
-        
-        // Find CH in DOM
-        var ch = $(this).attr('class').split(/\s+/)[0];
-        var elm = $('.' + ch + ' a');
-        
-        pin_click(elm);
-    });
-    
     // Toggle GPIO
-    $('.page .output-toggle').on('click', function(e) {
-        e.preventDefault();
-        
-        if ($(this).hasClass('button-disabled')) return;
-        
-        // Collect GPIO data
-        var gpio = parseInt($(this).data('gpio'));
-        
+    function toggle(gpio) {
         // State is reversed because this is a click event, not a change event
         var request = print_log('Toggle gpio ' + parseInt(pinBase + gpio) + '... ', true);
         
@@ -303,6 +278,42 @@ $(document).ready(function() {
                 }
             }
         });
+    }
+    
+    // Click on pin
+    $('.board a').on('click', function(e) {
+        e.preventDefault();
+        
+        pin_click($(this));
+    });
+    
+    // Click on dynamic block (relay, led etc)
+    $('.overlay div').on('click', function(e) {
+        e.preventDefault();
+        
+        // Find CH in DOM
+        var ch = $(this).attr('class').split(/\s+/)[0];
+        var elm = $('.' + ch + ' a');
+        
+        pin_click(elm);
+        
+        if (button_mode || $(this).is('[class*="button"]')) {
+            var gpio = parseInt(elm.data('gpio'));
+            
+            toggle(gpio);
+        }
+    });
+    
+    // Toggle GPIO
+    $('.page .output-toggle').on('click', function(e) {
+        e.preventDefault();
+        
+        if ($(this).hasClass('button-disabled')) return;
+        
+        // Collect GPIO data
+        var gpio = parseInt($(this).data('gpio'));
+        
+        toggle(gpio);
     });
     
     // Write GPIOs

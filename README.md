@@ -26,7 +26,7 @@ Alternatively, you can install manually. See our [setup guide](#setup-guide).
 
 ## Add Your Own Board
 
-Fork this repository and copy any existing board within /gui and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board. See notes within board.php for configuration details.
+Fork this repository, copy any existing board within /gui and change it your board name. Your directory will contain a board.php file which details everything about your board. The pinout is set up in php array format, change this to your board's pinout and modify the stylesheet to display your board correctly. See notes within board.php for configuration details.
 
 You can use your own version of the easy installer to streamline installation of your custom board onto your Pi, simply edit install.sh and change GITHUB_USERNAME to your own.
 
@@ -35,7 +35,7 @@ sudo wget https://github.com/USERNAME/HAT-GUI/blob/master/install.sh
 sudo sh install.sh
 ```
 
-Equally, you can delete any boards you dont need by simply deleting the directory.
+Equally, you can delete any boards you don't need by simply deleting the directory.
 
 ## Python Examples
 
@@ -51,18 +51,42 @@ We have a few ideas for improvements which we're looking to implement in the fut
 * Convert to Node.js
   - Would be awesome once done, but requires completely re-building from scratch. (╥_╥)
 
-### Image Overlays
+### Overlays
 
-Image overlays can be used to add interactive elements to your board such as relays or LEDs.
-CSS classes that contain "led" are dynamically displayed according to gpio status.
+Overlays can be used to add interactive elements to your board such as relays, buttons or LEDs.
+Note: the board stylesheet will load after the main stylesheet so you can override things if required.
 
-E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can add an image overlay to use for those LEDs with a small snippet of CSS. See [CTRL HAT](https://io.plasmadan.com/ctrlhat) for a working example.
+You can also add an image overlay to the entire board to add non-interactive details such as board markings, cut-outs or connectors. This should be precisely 600x518px (WxH) to fit correctly, as it will be automatically scaled to fit on mobile devices ect.
+
+```
+.board:before {
+    background-image: url("img/overlay.png");
+}
+```
+
+#### Dynamic Overlays
+
+Dynamic overlays are defined using a class name within the CSS section of board.php. They can be named anything, the name is only used to target them in your stylesheet. Dynamic overlays are used as an alternate way to select an I/O using a graphical element such as a relay or button.
+
+Dynamic overlays can be all be targetting at once using the `dynamic-overlay` class, which is added automatically.
+
+#### Button Overlays
+
+Dynamic overlays can also optionally toggle the associated GPIO when clicked. Perfect for emulating button pushes, but it can also improve GUI usability, especially on mobile devices. CSS classes that contain "button" will automatically work as buttons. This can be applied to any dynamic overlay, but not dynamic LEDs.
+
+Alternatively, setting the optional global `button_mode` parameter to true will force all dynamic overlays to work as buttons.
+
+#### LED Overlays
+
+LED overlays work in a similar way to dynamic overlays, except they are displayed according to GPIO status. CSS classes that contain "led" are considered to be LED overlays. LED overlays can be all be targetting at once using the `dynamic-led` class, which is added automatically.
+
+E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can add an overlay to use for those LEDs with a small snippet of CSS. See [Appliance HAT](https://io.plasmadan.com/appliancehat/) for a working example.
 
 ```
 .overlay .dynamic-led {
     width: 30px;
     height: 60px;
-    background: url("img/led.png");
+    background: #c2321d;
 }
 
 .overlay .led1 {
@@ -77,14 +101,6 @@ E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can ad
     top: 400px;
 }
 
-```
-
-You can also add an overlay to the entire board to add detail.
-
-```
-.board:before {
-    background-image: url("img/overlay.png");
-}
 ```
 
 # Setup Guide

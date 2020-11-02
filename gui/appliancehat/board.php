@@ -86,8 +86,8 @@ $pins = array (
     ['5V (5V GPIO Selection Jumper)',                                              'guide' => '5v'],
     ['3V3 (3.3V GPIO Selection Jumper)',          '3V3',                           'guide' => '3v3'],
     ['3V3 (3.3V GPIO Selection Jumper)',                                           'guide' => '3v3'],
-    ['LINK (Solid State Relay Power Jumper)',     'LINK',                          'guide' => 'link'],
-    ['LINK (Solid State Relay Power Jumper)',                                      'guide' => 'link']
+    ['LINK (Relay Power Jumper)',                 'LINK',                          'guide' => 'link'],
+    ['LINK (Relay Power Jumper)',                                                  'guide' => 'link']
 );
 
 // Guides listed in pin setup above are defined here as html blocks.

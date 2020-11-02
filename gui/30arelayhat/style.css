@@ -74,11 +74,10 @@
     left: -16px;
 }
 
-.overlay .relay0, .overlay .relay1 {
+.overlay .dynamic-overlay {
     width: 190px;
     height: 295px;
     background: #2d3436;
-    position: absolute;
     top: 95px;
     left: -430px;
     border-radius: 10px 10px 0 0;
@@ -89,21 +88,21 @@
     background: #2d3436;
 }
 
-.overlay .relay0:before, .overlay .relay1:before, .overlay .relay0:after, .overlay .relay1:after {
+.overlay .dynamic-overlay:before, .overlay .dynamic-overlay:after {
     content: '';
-    background: #2d3436;
     position: absolute;
+    background: #2d3436;
     bottom: 0;
 }
 
-.overlay .relay0:before, .overlay .relay1:before {
+.overlay .dynamic-overlay:before {
     width: 20px;
     height: 135px;
     left: -19px;
     border-radius: 10px 0 0 10px;
 }
 
-.overlay .relay0:after, .overlay .relay1:after {
+.overlay .dynamic-overlay:after {
     width: 36px;
     height: 170px;
     right: -35px;

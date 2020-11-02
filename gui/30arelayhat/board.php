@@ -56,8 +56,8 @@ $default_pinMode = 'out';
 // 'guide' => 'class'   /   'css' => 'css classes'
 
 $pins = array (
-    ['LINK (Solid State Relay Power Jumper)',                                      'guide' => 'link'],
-    ['LINK (Solid State Relay Power Jumper)',     'LINK',                          'guide' => 'link'],
+    ['LINK (Relay Power Jumper)',                                                  'guide' => 'link'],
+    ['LINK (Relay Power Jumper)',                 'LINK',                          'guide' => 'link'],
     ['3V3 (3.3V GPIO Selection Jumper)',                                           'guide' => '3v3'],
     ['3V3 (3.3V GPIO Selection Jumper)',          '3V3',                           'guide' => '3v3'],
     ['5V (5V GPIO Selection Jumper)',                                              'guide' => '5v'],

@@ -19,8 +19,10 @@
  * -----------------------------------------------------------------------------
  */
 
+$demo_mode = false;   // Test environment to demo the GUI without a Raspberry Pi
+$button_mode = false; // Treat all dynamic overlays as GPIO toggle buttons
+
 $pinBase = 100;
-$demo_mode = false;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . strtok($_SERVER['REQUEST_URI'], '?') . 'board.php';
 require_once __DIR__ . '/src/inc/functions.php';
@@ -56,6 +58,9 @@ $root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
 <body>
     <!-- Demo mode -->
     <input id="demo_mode" type="hidden" value="<?= $demo_mode ? 'true' : 'false' ?>">
+    
+    <!-- Button mode -->
+    <input id="button_mode" type="hidden" value="<?= $button_mode ? 'true' : 'false' ?>">
     
     <!-- Settings -->
     <input id="directory" type="hidden" value="<?= $root_dir ?>">

@@ -250,6 +250,11 @@ body {
     border-radius: 100%;
 }
 
+.overlay .dynamic-overlay {
+    position: absolute;
+    cursor: pointer;
+}
+
 .overlay .dynamic-led {
     position: absolute;
     display: none;

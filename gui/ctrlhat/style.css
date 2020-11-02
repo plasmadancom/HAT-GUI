@@ -43,11 +43,10 @@
     top: 440px;
 }
 
-.overlay .relay0, .overlay .relay1, .overlay .relay2, .overlay .relay3 {
+.overlay .dynamic-overlay {
     width: 407px;
     height: 71px;
     background: url("img/relay.png");
-    position: absolute;
     top: 115px;
     left: -204px;
 }
