@@ -90,15 +90,15 @@ E.g., if you have 4 GPIOs with classes led1, led2, led3, led4 respectively. You 
     top: 100px;
 }
 
-.overlay .led1 {
+.overlay .led2 {
     top: 200px;
 }
 
-.overlay .led2 {
+.overlay .led3 {
     top: 300px;
 }
 
-.overlay .led3 {
+.overlay .led4 {
     top: 400px;
 }
 

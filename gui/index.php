@@ -37,6 +37,17 @@ $root_dir = str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__) . '/';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $board->page_title ?></title>
     
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/icons/favicon-16x16.png">
+    <link rel="manifest" href="/src/icons/site.webmanifest">
+    <link rel="mask-icon" href="/src/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/src/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="msapplication-config" content="/src/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
     <!-- Search Engine -->
     <meta name="description" content="<?= $board->description ?>">
     <meta name="image" content="<?= $board->image_url ?>">

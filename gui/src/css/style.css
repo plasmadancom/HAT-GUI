@@ -344,10 +344,24 @@ body {
 }
 
 .page h1 {
+    position: relative;
     display: inline-block;
     font-size: 1.3em;
     font-weight: 700;
     margin-top: 0;
+    padding-left: 35px;
+}
+
+.page h1:before {
+    content: "";
+    position: absolute;
+    background: url(../icons/safari-pinned-tab.svg);
+    background-size: 32px;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    left: -4px;
+    top: -4px;
 }
 
 .page h2 {
@@ -363,10 +377,6 @@ body {
     font-size: 1.2em;
     font-weight: 700;
     margin: 0;
-}
-
-.page .intro h1, .page h3 {
-    color: #d33682;
 }
 
 .connection {
@@ -541,7 +551,7 @@ body {
 }
 
 .page-wrapper {
-    min-height: 405px;
+    min-height: 410px;
 }
 
 .page .i2c-table {

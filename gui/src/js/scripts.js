@@ -20,7 +20,7 @@
 $(document).ready(function() {
     // Parse settings from DOM
     var demo_mode = $('#demo_mode').val() == 'true';
-    var button_mode = $('#button_mode').val() == 'false';
+    var button_mode = $('#button_mode').val() == 'true';
     var pinBase = parseInt($('#pin_base').val());
     var extension = $('#extension').val().toLowerCase();
     var directory = $('#directory').val();
