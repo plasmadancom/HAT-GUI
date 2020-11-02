@@ -68,25 +68,26 @@ You can also add an image overlay to the entire board to add non-interactive det
 
 Dynamic overlays are defined using a class name within the CSS section of board.php. They can be named anything, the name is only used to target them in your stylesheet. Dynamic overlays are used as an alternate way to select an I/O using a graphical element such as a relay or button.
 
-Dynamic overlays can be all be targetting at once using the `dynamic-overlay` class, which is added automatically.
+Dynamic overlays can all be targetted at once using the `dynamic-overlay` class, which is added automatically.
 
 #### Button Overlays
 
-Dynamic overlays can also optionally toggle the associated GPIO when clicked. Perfect for emulating button pushes, but it can also improve GUI usability, especially on mobile devices. CSS classes that contain "button" will automatically work as buttons. This can be applied to any dynamic overlay, but not dynamic LEDs.
+Dynamic overlays can also optionally toggle the associated GPIO when clicked. Perfect for emulating button pushes, it can also improve GUI usability, especially on mobile devices. CSS classes that contain "button" will automatically work as buttons. This can be applied to any dynamic overlay, but not dynamic LEDs.
 
 Alternatively, setting the optional global `button_mode` parameter to true will force all dynamic overlays to work as buttons.
 
 #### LED Overlays
 
-LED overlays work in a similar way to dynamic overlays, except they are displayed according to GPIO status. CSS classes that contain "led" are considered to be LED overlays. LED overlays can be all be targetting at once using the `dynamic-led` class, which is added automatically.
+LED overlays work in a similar way to dynamic overlays, except they are displayed according to GPIO status. CSS classes that contain "led" are considered to be LED overlays. LED overlays can all be targetted at once using the `dynamic-led` class, which is added automatically.
 
-E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can add an overlay to use for those LEDs with a small snippet of CSS. See [Appliance HAT](https://io.plasmadan.com/appliancehat/) for a working example.
+E.g., if you have 4 GPIOs with classes led1, led2, led3, led4 respectively. You can add an overlay to use for those LEDs with a small snippet of CSS. See [Appliance HAT](https://io.plasmadan.com/appliancehat/) for a working example.
 
 ```
 .overlay .dynamic-led {
     width: 30px;
     height: 60px;
     background: #c2321d;
+    top: 100px;
 }
 
 .overlay .led1 {
@@ -102,6 +103,8 @@ E.g., if you have 3 GPIOs with classes led1, led2, led3 respectively. You can ad
 }
 
 ```
+
+This will set all LEDs to the same style and position them 100px apart vertically.
 
 # Setup Guide
 
