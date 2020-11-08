@@ -20,7 +20,7 @@
  */
 
 $demo_mode = false;   // Test environment to demo the GUI without a Raspberry Pi
-$button_mode = false; // Treat all dynamic overlays as GPIO toggle buttons
+$button_mode = true; // Treat all dynamic overlays as GPIO toggle buttons
 
 $pinBase = 100;
 

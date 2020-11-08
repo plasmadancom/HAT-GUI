@@ -56,7 +56,7 @@ We have a few ideas for improvements which we're looking to implement in the fut
 Overlays can be used to add interactive elements to your board such as relays, buttons or LEDs.
 Note: the board stylesheet will load after the main stylesheet so you can override things if required.
 
-You can also add an image overlay to the entire board to add non-interactive details such as board markings, cut-outs or connectors. This should be precisely 600x518px (WxH) to fit correctly, as it will be automatically scaled to fit on mobile devices ect.
+You can also add an image overlay to the entire board to add non-interactive details such as board markings, cut-outs or connectors. This should be precisely 600x518px (WxH) to fit correctly, as it will be automatically scaled to fit on mobile devices etc.
 
 ```
 .board:before {
