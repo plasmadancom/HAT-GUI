@@ -1,0 +1,97 @@
+.orientation {
+    transform: rotate(90deg);
+}
+
+.board {
+    bottom: -70px;
+}
+
+.board:before {
+    background-image: url("img/overlay.png");
+}
+
+.pinout, .overlay, .board:before {
+    height: 278px;
+}
+
+.pinout {
+    width: 500px;
+}
+
+.overlay {
+    width: 100px;
+}
+
+.gpiobase {
+    transform: rotate(-90deg);
+    width: 48px;
+    height: 380px;
+    top: 56px;
+    left: 230px;
+}
+
+.overlay .dynamic-led {
+    width: 16px;
+    height: 16px;
+    background: #c2321d;
+    top: 88.5px;
+    left: -208px;
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.overlay .led1 {
+    top: 154px;
+}
+
+.overlay .led2 {
+    top: 218.5px;
+}
+
+.overlay .led3 {
+    top: 283px;
+}
+
+.overlay .led4 {
+    top: 348px;
+}
+
+.overlay .led5 {
+    top: 413px;
+}
+
+.overlay .dynamic-overlay {
+    width: 265px;
+    height: 115px;
+    background: #2d3436;
+    top: 81px;
+    left: -490px;
+    border-radius: 5px;
+}
+
+.overlay .dynamic-overlay:before, .overlay .dynamic-overlay:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: #f59e33;
+    width: 4px;
+    height: 55px;
+    top: 31px;
+    left: 30px;
+}
+
+.overlay .dynamic-overlay:after {
+    left: 85px;
+}
+
+.overlay .relay1:before {
+    left: 235px;
+}
+
+.overlay .relay1:after {
+    left: 180px;
+}
+
+.overlay .relay1 {
+    left: -176px;
+}

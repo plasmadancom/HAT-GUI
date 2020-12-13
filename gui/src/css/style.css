@@ -447,7 +447,7 @@ body {
 }
 
 .page .boards li {
-    width: 33.3%;
+    width: 25%;
     min-width: 100px;
     float: left;
 }
