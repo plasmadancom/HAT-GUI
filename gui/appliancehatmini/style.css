@@ -34,30 +34,14 @@
     width: 16px;
     height: 16px;
     background: #c2321d;
-    top: 88.5px;
+    top: 98.5px;
     left: -208px;
     border-radius: 100%;
     z-index: -1;
 }
 
 .overlay .led1 {
-    top: 154px;
-}
-
-.overlay .led2 {
-    top: 218.5px;
-}
-
-.overlay .led3 {
-    top: 283px;
-}
-
-.overlay .led4 {
-    top: 348px;
-}
-
-.overlay .led5 {
-    top: 413px;
+    top: 162.5px;
 }
 
 .overlay .dynamic-overlay {
