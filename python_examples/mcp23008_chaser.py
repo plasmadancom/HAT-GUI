@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# mcp23017_chaser.py - Infinite chaser sequence for multiple MCP23017 expanders
+# mcp23008_chaser.py - Infinite chaser sequence for multiple MCP23008 expanders
 # 
 # Copyright (C) 2020 Dan Jones - https://plasmadan.com
 # 
@@ -25,7 +25,7 @@ from time import sleep
 # Setup
 pinBase = 100                                                # WiringPi pinBase (anything above 64)
 devices = [0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27]   # I2C device list
-outputs = [0, 1, 2, 3]                                       # WiringPi output port list
+outputs = [0, 1]                                             # WiringPi output port list
 
 # Timing
 hold_on = 0.2                                                # Time to hold outputs on (seconds)
@@ -38,7 +38,7 @@ sequence = []                                                # Create the sequen
 count = pinBase
 
 for i2c in devices + list(reversed(devices)):                # Loop devices normally, then reversed
-    wiringpi.mcp23017Setup(count, i2c)                       # Set up the pins and i2c address
+    wiringpi.mcp23008Setup(count, i2c)                       # Set up the pins and i2c address
     
     if count > len(devices)*100:                             # Reverse direction
         for i in list(reversed(outputs)):
@@ -60,7 +60,7 @@ for i2c in devices + list(reversed(devices)):                # Loop devices norm
     
     count += 100
 
-print 'MCP23017 Infinite Chaser Sequence Loaded!'
+print 'MCP23008 Infinite Chaser Sequence Loaded!'
 
 try:
     while True:                                              # Loop forever
