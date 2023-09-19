@@ -178,20 +178,14 @@ You should see a grid of all populated I2C devices.
 
 ## Install WiringPi
 
-```
-sudo apt install wiringpi -y
-```
-
-If you wish to write your own scripts using Python, you will need to install WiringPi for Python also.
+Since the original WiringPi library is deprecated and no longer maintained we will install WiringPi from an unofficial source.
 
 ```
-sudo apt install python-pip -y
-```
-
-Install WiringPi for Python.
-
-```
-sudo pip install wiringpi
+sudo apt install git-core gcc make -y
+git clone https://github.com/WiringPi/WiringPi --branch master --single-branch ~/wiringpi
+cd ~/wiringpi
+./build
+cd ~
 ```
 
 ## Install Apache & PHP
