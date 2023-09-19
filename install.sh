@@ -80,8 +80,13 @@ update_file "dtparam=i2c_baudrate" "dtparam=i2c_baudrate=400000" "I2C bus baudra
 
 
 echo "Install HAT-GUI required packages ..."
-apt-get install i2c-tools wiringpi apache2 php libapache2-mod-php subversion python-pip -y
-pip install wiringpi
+apt-get install i2c-tools git-core gcc make apache2 php libapache2-mod-php subversion -y
+
+echo "Clone wiringpi and build ..."
+git clone https://github.com/WiringPi/WiringPi --branch master --single-branch ~/wiringpi
+cd ~/wiringpi
+./build
+cd ~
 
 # Enable rewrite module
 a2enmod rewrite
